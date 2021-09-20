@@ -1,12 +1,17 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Todo from './Todo';
+import { v4 as uuidv4 } from "uuid"
 
 const Header = () => {
     const [todoList, setTodoList]=React.useState([{
+      id:uuidv4(),
       title: "Sample Todo",
       completed: false
     }]);
+    useEffect(() => {
+      console.log(todoList);
+    }, [todoList])
     const[all, setAll]=useState(true)
     const [active, setActive]=useState(false);
     const[completed, setCompleted]=useState(false);
@@ -14,28 +19,41 @@ const Header = () => {
     const changeTheme = () => {
         document.body.classList.toggle("theme-light");
     }
-const removeElement = (index) => {
-        var array = [...todoList];
+const removeElement = (todo) => {
+        var array=[...todoList]
+        var index = array.indexOf(todo)
         array.splice(index, 1);
-        console.log(index);
         setTodoList(array);
-        console.log(todoList)
       }
 const addTask = () => {
 const newItem=document.querySelector(".add-task");
 newItem.addEventListener('keypress', (e) => {
     if(e.charCode===13 &&  newItem.value.length>0){
       setTodoList(todoList=>[...todoList,{
+        id:uuidv4(),
             title: newItem.value,
             completed: false
         }]);
         newItem.value='';
-        
     }
 });
 }
-const completeTask = (index) => {
-    var array=todoList;
+const clearCompleted = () => {
+  var i;
+  var array=[...todoList]
+  for(i=0; i<array.length; i++)
+  {
+    if(array[i].completed)
+    {
+      array.splice(i, 1);
+    }
+  }
+  setTodoList(array);
+
+}
+const completeTask = (todo) => {
+    var array=[...todoList]
+        var index = array.indexOf(todo)
     var item =array[index];
     if(item.completed)
     {
@@ -53,7 +71,6 @@ const completeTask = (index) => {
       if(!todoList[i].completed)
       setCompcount(compcount+1)
     }
-    console.log(todoList[index].completed)
   }
   const displayList = () =>
   {
@@ -62,7 +79,6 @@ const completeTask = (index) => {
     return todoList.map((todo, index) =>
       <Todo
       key={index} 
-      id={index}
       todo={todo}
       removeElement={removeElement}
       completeTask={completeTask}
@@ -75,7 +91,6 @@ const completeTask = (index) => {
       return todoList.map((todo, index) =>
       todo.completed ? null : <Todo
       key={index} 
-      id={index}
       todo={todo}
       removeElement={removeElement}
       completeTask={completeTask}
@@ -88,7 +103,6 @@ const completeTask = (index) => {
       return todoList.map((todo, index) =>
       todo.completed ? <Todo
       key={index} 
-      id={index}
       todo={todo}
       removeElement={removeElement}
       completeTask={completeTask}
@@ -120,7 +134,7 @@ const completeTask = (index) => {
   <input type="radio" className="task-box" id ="completed" name="status"/>
   <label htmlFor="completed" className="stat" onClick={() => {setAll(false); setActive(false); setCompleted(true);}}>Completed</label>
   </form>
-  <p className="task-status-item">Clear completed</p>
+  <p className="task-status-item" onClick={clearCompleted}>Clear completed</p>
 </div>
    </div>
     );
