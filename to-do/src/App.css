@@ -233,6 +233,7 @@ h1 {
 }
 .stat {
   padding: 3% 0% 0% 15%;
+  cursor: pointer;
 }
 .status input:checked + .stat {
   color: hsl(220, 98%, 61%);
