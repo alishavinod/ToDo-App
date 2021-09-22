@@ -1,17 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap");
 .theme-dark {
-  background-image: url(images/bg-desktop-dark.jpg);
+  background-image: url(images/bg-dark.jpg);
   background-repeat: no-repeat;
-  background-size: 100% auto;
+  background-size: 100% 350px;
   background-color: hsl(235, 21%, 11%) !important;
   font-family: "Josefin Sans", sans-serif !important;
   font-size: 18px !important;
   color: white !important;
 }
 .theme-light {
-  background-image: url(images/bg-desktop-light.jpg);
+  background-image: url(images/bg-light.jpg);
   background-repeat: no-repeat;
-  background-size: 100% auto;
+  background-size: 100% 350px;
   background-color: white !important;
   font-family: "Josefin Sans", sans-serif !important;
   font-size: 18px !important;
@@ -73,6 +73,7 @@ h1 {
   display: flex;
   padding: 17px 0% 0% 4%;
 }
+
 .add-task-checkbox {
   display: none;
 }

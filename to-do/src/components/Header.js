@@ -117,8 +117,8 @@ const completeTask = (todo) => {
       <div className="theme" onClick={changeTheme}></div>
   </div>
   <div className="input-task">
-  <input type="checkbox" className="add-task-checkbox"/>
-  <span className="checkmark"></span>
+  {/* <input type="checkbox" className="add-task-checkbox"/>
+  <span className="checkmark"></span> */}
   <input type="text" className="form-control add-task" placeholder="Create a new todo..." onChange={addTask}/>
   </div>
   <div>
